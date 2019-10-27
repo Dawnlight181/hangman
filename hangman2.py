@@ -1,9 +1,9 @@
 import random
 
 def hangman():
-    word_list = ["people", "hooky", "ordiary", "example"]
-    random_number = random.randint(0, 3)
-    word = word_list[random_number]
+    words = {"cat": "animal", "dragon": "imaginary animal", "soup": "food", "computer": "useful tool", "febrary": "month"}
+    answer = random.choice(list(words.items()))
+    word = answer[0]
     wrong = 0
     stages = ["",
                "_________     ",
@@ -20,7 +20,9 @@ def hangman():
     print("ハングマンへようこそ！")
     while wrong < len(stages) - 1:
         print("\n")
-        msg = "１文字を予想してね"
+        msg = "１文字を予想してね:"
+        if wrong > 3:
+            msg = "１文字を予想してね,ヒント,{}:".format(answer[1])
         char = input(msg)
         if char in rletters:
             cind = rletters.index(char)
@@ -41,4 +43,3 @@ def hangman():
         print("あなたの負け！正解は {}。".format(word))
 
 hangman()
-        
